@@ -13,6 +13,7 @@ import {
   getDeliveryOption,
 } from "../../data/deliveryOptions.js";
 import { renderPaymentSummary } from "./paymentSummary.js";
+import { renderCheckoutHeader } from "./checkoutHeader.js";
 
 export function renderOrderSummary() {
   let cartSummaryHTML = "";
@@ -133,6 +134,8 @@ export function renderOrderSummary() {
 
   function updateCartQuantity() {
     const cartQuantity = calculateCartQuantity();
+
+    renderCheckoutHeader();
 
     document.querySelector(
       ".js-return-to-home-link"
