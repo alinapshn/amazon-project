@@ -125,11 +125,7 @@ export function renderOrderSummary() {
       const productId = link.dataset.productId;
       removeFromCart(productId);
 
-      const container = document.querySelector(
-        `.js-cart-item-container-${productId}`
-      );
-      container.remove();
-
+      renderOrderSummary();
       updateCartQuantity();
       renderPaymentSummary();
     });
@@ -162,11 +158,13 @@ export function renderOrderSummary() {
 
     link.addEventListener("click", () => {
       handleUpdateQuantity(productId, quantityInput);
+      renderPaymentSummary();
     });
 
     quantityInput.addEventListener("keydown", (event) => {
       if (event.key === "Enter") {
         handleUpdateQuantity(productId, quantityInput);
+        renderPaymentSummary();
       }
     });
   });
