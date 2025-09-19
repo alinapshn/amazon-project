@@ -50,7 +50,7 @@ export function renderOrderSummary() {
             </div>
             <div class="product-price js-product-price-${
               matchingProduct.id
-            }">$${formatCurrency(matchingProduct.priceCents)}</div>
+            }">${matchingProduct.getPrice()}</div>
             <div class="product-quantity js-product-quantity-${
               matchingProduct.id
             }">
@@ -109,9 +109,9 @@ export function renderOrderSummary() {
       <input
         type="radio"
         ${isChecked ? "checked" : ""}
-        class="delivery-option-input js-delivery-option-input-${matchingProduct.id}-${
-        deliveryOption.id
-      }"
+        class="delivery-option-input js-delivery-option-input-${
+          matchingProduct.id
+        }-${deliveryOption.id}"
         name="delivery-option-${matchingProduct.id}"
       />
       <div>
