@@ -118,12 +118,34 @@ class Cart {
 
     this.saveToStorage();
   }
+  
+  updateCartQuantity(productId) {
+    const addedMessageTimeouts = {};
+    const cartQuantity = cart.calculateCartQuantity();
+    document.querySelector(".js-cart-quantity").innerHTML = cartQuantity;
+
+    if (!productId) return;
+
+    const addedMessage = document.querySelector(
+      `.js-added-to-cart-${productId}`
+    );
+    if (!addedMessage) return;
+
+    addedMessage.classList.add("added-to-cart-visible");
+
+    const previousTimeoutId = addedMessageTimeouts[productId];
+    if (previousTimeoutId) {
+      clearTimeout(previousTimeoutId);
+    }
+
+    const timeoutId = setTimeout(() => {
+      addedMessage.classList.remove("added-to-cart-visible");
+    }, 2000);
+
+    addedMessageTimeouts[productId] = timeoutId;
+  }
 }
 
 export const cart = new Cart("cart-oop");
 const businessCart = new Cart("cart-business");
 
-console.log(cart);
-console.log(businessCart);
-
-console.log(businessCart instanceof Cart);
