@@ -129,6 +129,5 @@ export function loadCart(fun) {
 export async function loadCartFetch() {
   const responce = await fetch("https://supersimplebackend.dev/cart");
   const text = await responce.text();
-  console.log(text);
   return text;
 }
