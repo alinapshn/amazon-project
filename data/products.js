@@ -18,6 +18,7 @@ export class Product {
   name;
   rating;
   priceCents;
+  keywords;
 
   constructor(productDetails) {
     this.id = productDetails.id;
@@ -25,6 +26,7 @@ export class Product {
     this.name = productDetails.name;
     this.rating = productDetails.rating;
     this.priceCents = productDetails.priceCents;
+    this.keywords = productDetails.keywords;
   }
 
   getStarsUrl() {
@@ -147,7 +149,6 @@ export function loadProducts(fun) {
       }
       return new Product(productDetails);
     });
-    console.log("load products");
 
     fun();
   });

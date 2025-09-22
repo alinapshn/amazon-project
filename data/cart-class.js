@@ -118,11 +118,15 @@ class Cart {
 
     this.saveToStorage();
   }
-  
+
   updateCartQuantity(productId) {
     const addedMessageTimeouts = {};
-    const cartQuantity = cart.calculateCartQuantity();
-    document.querySelector(".js-cart-quantity").innerHTML = cartQuantity;
+    const cartQuantity = this.calculateCartQuantity();
+    const cartQuantityElement = document.querySelector(".js-cart-quantity");
+
+    if (cartQuantityElement) {
+      cartQuantityElement.innerHTML = cartQuantity;
+    }
 
     if (!productId) return;
 
@@ -144,8 +148,13 @@ class Cart {
 
     addedMessageTimeouts[productId] = timeoutId;
   }
+
+  resetCart() {
+    this.cartItems = [];
+    this.saveToStorage();
+    this.updateCartQuantity();
+  }
 }
 
-export const cart = new Cart("cart-oop");
+export let cart = new Cart("cart-oop");
 const businessCart = new Cart("cart-business");
-

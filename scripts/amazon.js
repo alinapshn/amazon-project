@@ -8,7 +8,31 @@ loadProducts(renderProductsGrid);
 function renderProductsGrid() {
   let productsHTML = "";
 
-  products.forEach((product) => {
+  const url = new URLSearchParams(location.search);
+  const search = url.get("search") ? url.get("search").toLowerCase() : "";
+
+  let filteredProducts = products;
+
+  if (search) {
+    filteredProducts = products.filter((product) => {
+      let matchingKeyword = false;
+
+      product.keywords.forEach((keyword) => {
+        if (keyword.toLowerCase().includes(search.toLowerCase())) {
+          matchingKeyword = true;
+        }
+      });
+
+      return (
+        matchingKeyword ||
+        product.name.toLowerCase().includes(search.toLowerCase())
+      );
+    });
+
+    document.querySelector(".js-search-bar").value = search;
+  }
+
+  filteredProducts.forEach((product) => {
     productsHTML += `
      <div class="product-container">
           <div class="product-image-container">
